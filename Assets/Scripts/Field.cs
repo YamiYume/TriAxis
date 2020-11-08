@@ -25,39 +25,35 @@ public class Field : MonoBehaviour
 
     private void Localization()
     {
+        InField.Clear();
         for (int i = 0; i < this.gameObject.transform.childCount; i++){
             InField.Add(this.gameObject.transform.GetChild(i).transform.gameObject);
         }
     }
     public void Elimination()
     {
-        Debug.Log("here");
-        Localization();
-        for (int i = 0; i < this.gameObject.transform.lossyScale.x; i++)
+        for (int i = 4; i > -1; i--)
         {
-            int M=0;
-            List<GameObject> eliminable= new List<GameObject>();
+            Localization();
+            List<GameObject> eliminable=new List<GameObject>();
             foreach (var item in InField)
             {
-                if((int)-(this.transform.lossyScale.y-1)/2+i==Vector3Int.RoundToInt(item.gameObject.transform.position).x)
+                if (Vector3Int.RoundToInt(item.transform.position).x==-2+i)
                 {
                     eliminable.Add(item);
                 }
+                
             }
             if(eliminable.Count==25)
             {
-                M+=1;
                 foreach (var item in eliminable)
                 {
                     Destroy(item);
                 }
-            }
-            if(M>0)
-            {
                 Localization();
-                foreach (var item in eliminable)
+                foreach (var item in InField)
                 {
-                    item.GetComponent<Monomin>().Fall(M);
+                    item.GetComponent<Monomin>().Fall(i);
                 }
             }
         }

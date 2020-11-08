@@ -23,7 +23,6 @@ public class Trimin : MonoBehaviour
     }
 
     private void Update() {
-        Field.GetComponent<Field>().Elimination();
         if(Input.GetKeyDown(KeyCode.W) & !InRotation){
             if(Rotable()){
                 Rotation=new Vector3(0,0,1);
@@ -100,6 +99,7 @@ public class Trimin : MonoBehaviour
                     Instantiate(Mono,item,Quaternion.identity);
                 }
                 Manager.SpawnNewTrimino();
+                Field.GetComponent<Field>().Elimination();
                 Destroy(this.gameObject);
             }
         }

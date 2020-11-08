@@ -12,7 +12,9 @@ public class Monomin : MonoBehaviour
 
     public void Fall(int N)
     {
-        if(this.gameObject.transform.position.x>-(this.transform.lossyScale.x-1)/2)
-        this.gameObject.transform.Translate(new Vector3(-N,0,0),Space.World);
+        if(this.gameObject.transform.parent.name=="Cube"& this.transform.position.x>N-2)
+        {
+            this.gameObject.transform.Translate(new Vector3(-1,0,0),Space.World);
+        }
     }
 }
