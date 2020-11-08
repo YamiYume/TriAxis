@@ -23,6 +23,7 @@ public class Trimin : MonoBehaviour
     }
 
     private void Update() {
+        Field.GetComponent<Field>().Elimination();
         if(Input.GetKeyDown(KeyCode.W) & !InRotation){
             if(Rotable()){
                 Rotation=new Vector3(0,0,1);

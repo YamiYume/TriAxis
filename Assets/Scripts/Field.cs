@@ -10,17 +10,13 @@ public class Field : MonoBehaviour
         InField=new List<GameObject>();
     }
 
-    private void Update() {
-
-    }
-
     public bool Verification(Vector3 Candidate)
     {
         Localization();
         bool R=true;
         foreach (var item in InField)
         {
-            if((int)item.transform.position.x==(int)Candidate.x & (int)item.transform.position.y==(int)Candidate.y & (int)item.transform.position.z==(int)Candidate.z){
+            if(Vector3Int.Distance(Vector3Int.RoundToInt(Candidate),Vector3Int.RoundToInt(item.transform.position))<1){
                 R=false;
             }
         }
@@ -33,39 +29,36 @@ public class Field : MonoBehaviour
             InField.Add(this.gameObject.transform.GetChild(i).transform.gameObject);
         }
     }
-    private void Elimination()
+    public void Elimination()
     {
+        Debug.Log("here");
         Localization();
-        int M=0;
-        for (int i = (int)-(this.transform.lossyScale.x-1)/2; i < (int)(this.transform.lossyScale.x-1)/2;i++)
+        for (int i = 0; i < this.gameObject.transform.lossyScale.x; i++)
         {
-            List<GameObject> eliminable=new List<GameObject>();
-            Vector3 P=new Vector3(i,(this.transform.lossyScale.y-1)/2,-(this.transform.lossyScale.z-1)/2);
-            Vector3 n=new Vector3(1,0,0);
+            int M=0;
+            List<GameObject> eliminable= new List<GameObject>();
             foreach (var item in InField)
             {
-                Vector3 variable=item.transform.position;
-                if(variable.x*n.x+variable.y*n.y+variable.y*n.y==(P.x*n.x+P.y*n.y+P.z*n.z))
+                if((int)-(this.transform.lossyScale.y-1)/2+i==Vector3Int.RoundToInt(item.gameObject.transform.position).x)
                 {
                     eliminable.Add(item);
                 }
             }
-            if(eliminable.Count==81)
+            if(eliminable.Count==25)
             {
+                M+=1;
                 foreach (var item in eliminable)
                 {
                     Destroy(item);
                 }
-                M+=1;
             }
-
-        }
-        if(M>0)
-        {
-            Localization();
-            foreach (var item in InField)
+            if(M>0)
             {
-                item.GetComponent<Monomin>().Fall(M);
+                Localization();
+                foreach (var item in eliminable)
+                {
+                    item.GetComponent<Monomin>().Fall(M);
+                }
             }
         }
     }
