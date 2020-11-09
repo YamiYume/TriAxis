@@ -26,33 +26,33 @@ public class Trimin : MonoBehaviour
     private void Update() {
         if(Input.GetKeyDown(KeyCode.W) & !InRotation){
             if(Rotable()){
-                Rotation=new Vector3(0,0,1);
+                Rotation=new Vector3(0,0,5);
                 InRotation=true;
                 Count=0;
             }
         }
         if(Input.GetKeyDown(KeyCode.S)& !InRotation){
             if(Rotable()){
-                Rotation=new Vector3(0,0,-1);
+                Rotation=new Vector3(0,0,-5);
                 InRotation=true;
                 Count=0;
             }
         }
         if(Input.GetKeyDown(KeyCode.A)& !InRotation){
             if(Rotable()){
-                Rotation=new Vector3(-1,0,0);           
+                Rotation=new Vector3(-5,0,0);           
                 InRotation=true;
                 Count=0;
             }
         }
         if(Input.GetKeyDown(KeyCode.D)& !InRotation){
             if(Rotable()){
-                Rotation=new Vector3(1,0,0);            
+                Rotation=new Vector3(5,0,0);            
                 InRotation=true;
                 Count=0;
             }
         }
-        if(Count<90)
+        if(Count<18)
         {
             this.gameObject.transform.Rotate(Rotation,Space.Self);
             Count+=1;   

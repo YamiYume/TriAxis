@@ -14,6 +14,7 @@ public class Manager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         Triminos=Resources.LoadAll<GameObject>("Triminos");
         aded=false;
+        Application.targetFrameRate=60;
     }
 
     public void SpawnNewTrimino()
