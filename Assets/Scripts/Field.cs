@@ -5,9 +5,11 @@ using UnityEngine;
 public class Field : MonoBehaviour
 {
     private List<GameObject> InField;
+    private Manager Manager;
 
     private void Awake() {
         InField=new List<GameObject>();
+        Manager=GameObject.Find("/Manager").GetComponent<Manager>();
     }
 
     public bool Verification(Vector3 Candidate)
@@ -55,6 +57,7 @@ public class Field : MonoBehaviour
                 {
                     item.GetComponent<Monomin>().Fall(i);
                 }
+                Manager.Score+=1000;
             }
         }
     }

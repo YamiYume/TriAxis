@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Trimin : MonoBehaviour
 {
@@ -95,6 +96,12 @@ public class Trimin : MonoBehaviour
             else
             {
                 Localize();
+                foreach (var item in Cubes){
+                    if(item.x>=3)
+                    {
+                        SceneManager.LoadScene("Game Over",LoadSceneMode.Single);
+                    }
+                }
                 foreach (var item in Cubes){
                     Instantiate(Mono,item,Quaternion.identity);
                 }
